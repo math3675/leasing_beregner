@@ -7,7 +7,94 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+  display: flex;
+  align-items: stretch;
+  height: 100vh;
+}
+
+.left-col {
+  background: #0da5d3;
+  width: 40%;
+  padding: 3%;
+}
+
+.right-col {
+  width: 60%;
+  padding: 3%;
+}
+
+.description {
+  color: white;
+}
+
+#logo {
+  width: 250px;
+  height: auto;
+}
+
+#pdf {
+  background: #e2e2e2;
+  padding: 25.1px;
+  position: absolute;
+  bottom: 0;
+  right: 286px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+#pdfImg {
+  width: 40px;
+  margin-left: 10px;
+}
+
+label {
+  display: block;
+  font-weight: 700;
+}
+
+.leasing-length {
+  margin: 5px 0;
+}
+
+.radio-fields {
+  margin-bottom: 50px;
+}
+
+.form-input {
+  border-bottom: 1px solid black;
+  border-right: none;
+  border-top: none;
+  border-left: none;
+  padding: 5px 0;
+  font-size: initial;
+}
+
+#total {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #0b386d;
+  padding: 0 3%;
+  color: white;
+  width: 200px;
+}
+.field {
+  margin-bottom: 50px;
+}
+
+.radio-label {
+  font-weight: 400;
+  padding: 3px 0;
+}
+
+.sub-label {
+  margin-top: 0px;
+  font-size: 12px;
+  font-style: italic;
+}
+
+#totalPrice {
+  margin-top: -10px;
 }
