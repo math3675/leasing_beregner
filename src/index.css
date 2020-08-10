@@ -33,22 +33,6 @@ body {
   height: auto;
 }
 
-#pdf {
-  background: #e2e2e2;
-  padding: 25.1px;
-  position: absolute;
-  bottom: 0;
-  right: 286px;
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-}
-
-#pdfImg {
-  width: 40px;
-  margin-left: 10px;
-}
-
 label {
   display: block;
   font-weight: 700;
@@ -69,17 +53,40 @@ label {
   border-left: none;
   padding: 5px 0;
   font-size: initial;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-bottom: 1px solid #0da5d3;
 }
 
 #total {
   position: absolute;
   bottom: 0;
+  display: flex;
   right: 0;
-  background: #0b386d;
-  padding: 0 3%;
-  color: white;
-  width: 200px;
 }
+
+#total #price {
+  width: 300px;
+  background: #d42255;
+  padding: 0px 20px;
+  color: white;
+}
+
+#total #pdf {
+  background: #32416e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 95px;
+}
+
+#pdfImg {
+  width: 40px;
+}
+
 .field {
   margin-bottom: 50px;
 }
@@ -90,7 +97,8 @@ label {
 }
 
 .sub-label {
-  margin-top: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
   font-size: 12px;
   font-style: italic;
 }

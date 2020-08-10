@@ -9,9 +9,9 @@ export default function InputField(props) {
         className='form-input'
         type={props.type}
         name={props.name}
-        onChange={props.event}
+        onChange={props.onChange}
       />
-      <span>Kr.</span>
+      <span>{props.symbol}</span>
     </div>
   );
 }
