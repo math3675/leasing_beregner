@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import InputField from './InputField';
 import LeasingLength from './LeasingLength';
 
 export default function RightColumn() {
-  /*   const [info, setInfo] = useState({
+  const [info, setInfo] = useState({
     person: {
       firstName: '',
       lastName: '',
@@ -20,19 +20,24 @@ export default function RightColumn() {
       price: 0,
       extraAllowance: 0,
       residualValue: 0,
-      length: 0,
+      length: 24,
       totalPrice: 0,
     },
   });
 
-  console.log(info.car.make); */
+  const totalPriceResult =
+    ((info.leasing.price -
+      info.leasing.extraAllowance -
+      info.leasing.residualValue) *
+      1.057) /
+    info.leasing.length;
 
-  const [carPrice, setCarPrice] = useState(0);
-  const [extra, setExtra] = useState(0);
-  const [residual, setResidual] = useState(0);
-  const [time, settime] = useState(24);
-
-  console.log(carPrice);
+  useEffect(() => {
+    setInfo({
+      ...info,
+      leasing: { ...info.leasing, totalPrice: totalPriceResult },
+    });
+  }, [totalPriceResult]);
 
   return (
     <div className='right-col'>
@@ -41,19 +46,48 @@ export default function RightColumn() {
         subLabel='Eks. Skoda'
         type='text'
         name='car-make'
-        /* event={(event) =>
+        event={(event) =>
           setInfo({
             ...info,
-            car: { make: event.target.value },
+            car: { ...info.car, make: event.target.value },
           })
-        } */
+        }
+      />
+      <InputField
+        label='Model'
+        subLabel='Eks. Fabia'
+        type='text'
+        name='car-model'
+        event={(event) =>
+          setInfo({
+            ...info,
+            car: { ...info.car, model: event.target.value },
+          })
+        }
+      />
+      <InputField
+        label='Årgang'
+        subLabel='Eks. 2011'
+        type='text'
+        name='car-year'
+        event={(event) =>
+          setInfo({
+            ...info,
+            car: { ...info.car, year: event.target.value },
+          })
+        }
       />
       <InputField
         label='Anskaffelsessum'
         subLabel='Anskeffelsessummen svarer til den fulde pris på bilen'
         type='text'
         name='carPrice'
-        onChange={(event) => setCarPrice(event.target.value)}
+        event={(event) =>
+          setInfo({
+            ...info,
+            leasing: { ...info.leasing, price: event.target.value },
+          })
+        }
         symbol='Kr.'
       />
       <InputField
@@ -61,7 +95,12 @@ export default function RightColumn() {
         subLabel='Den ekstraordinære ydelser er op til 20% af købsprisen'
         type='text'
         name='extra'
-        onChange={(event) => setExtra(event.target.value)}
+        event={(event) =>
+          setInfo({
+            ...info,
+            leasing: { ...info.leasing, extraAllowance: event.target.value },
+          })
+        }
         symbol='Kr.'
       />
       <InputField
@@ -69,7 +108,12 @@ export default function RightColumn() {
         subLabel='Restværdien er typisk 10 % af anskaffelsessummen'
         type='text'
         name='residual'
-        onChange={(event) => setResidual(event.target.value)}
+        event={(event) =>
+          setInfo({
+            ...info,
+            leasing: { ...info.leasing, residualValue: event.target.value },
+          })
+        }
         symbol='Kr.'
       />
       <label>Løbetid</label>
@@ -77,21 +121,34 @@ export default function RightColumn() {
       <LeasingLength
         name='time'
         value={24}
-        onChange={(event) => settime(event.target.value)}
+        event={(event) =>
+          setInfo({
+            ...info,
+            leasing: { ...info.leasing, length: event.target.value },
+          })
+        }
         checked={true}
       />
-
       <LeasingLength
         name='time'
         value={36}
-        onChange={(event) => settime(event.target.value)}
+        event={(event) =>
+          setInfo({
+            ...info,
+            leasing: { ...info.leasing, length: event.target.value },
+          })
+        }
       />
       <LeasingLength
         name='time'
         value={48}
-        onChange={(event) => settime(event.target.value)}
+        event={(event) =>
+          setInfo({
+            ...info,
+            leasing: { ...info.leasing, length: event.target.value },
+          })
+        }
       />
-
       <div id='total'>
         <div id='pdf'>
           <img id='pdfImg' src='./images/pdf.svg' alt='pdf' />
@@ -99,9 +156,7 @@ export default function RightColumn() {
         <div id='price'>
           <p className='inline'>Leasing pris / md.:</p>
           <h2 className='inline' id='totalPrice'>
-            {Number(
-              ((carPrice - extra - residual) * 1.057) / time
-            ).toLocaleString('da', {
+            {Number(totalPriceResult).toLocaleString('da', {
               maximumSignificantDigits: 6,
             })}{' '}
             kr.

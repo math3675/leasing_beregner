@@ -9,7 +9,7 @@ export default function InputField(props) {
         className='form-input'
         type={props.type}
         name={props.name}
-        onChange={props.onChange}
+        onBlur={props.event}
       />
       <span>{props.symbol}</span>
     </div>
