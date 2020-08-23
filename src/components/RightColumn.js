@@ -25,12 +25,15 @@ export default function RightColumn() {
     },
   });
 
-  const totalPriceResult =
+  const totalPriceResult = (
     ((info.leasing.price -
       info.leasing.extraAllowance -
       info.leasing.residualValue) *
       1.057) /
-    info.leasing.length;
+    info.leasing.length
+  )
+    .toFixed(2)
+    .replace(/\./g, ',');
 
   useEffect(() => {
     setInfo({
@@ -38,6 +41,8 @@ export default function RightColumn() {
       leasing: { ...info.leasing, totalPrice: totalPriceResult },
     });
   }, [totalPriceResult]);
+
+  console.log(info);
 
   return (
     <div className='right-col'>
@@ -156,10 +161,7 @@ export default function RightColumn() {
         <div id='price'>
           <p className='inline'>Leasing pris / md.:</p>
           <h2 className='inline' id='totalPrice'>
-            {Number(totalPriceResult).toLocaleString('da', {
-              maximumSignificantDigits: 6,
-            })}{' '}
-            kr.
+            {totalPriceResult} kr.
           </h2>
         </div>
       </div>
